@@ -1,0 +1,40 @@
+﻿@page "/interns"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using TraineeRecord.Models
+@using TraineeRecord.Data
+@implements IAsyncDisposable
+@inject IDbContextFactory<TraineeRecord.Data.TraineeRecordContext> DbFactory
+
+<PageTitle>Interns</PageTitle>
+
+<h1>Interns</h1>
+
+<p>
+    <a href="interns/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.Intern">
+    <PropertyColumn Property="intern => intern.FirstName" />
+    <PropertyColumn Property="intern => intern.LastName" />
+    <PropertyColumn Property="intern => intern.Gender" />
+    <PropertyColumn Property="intern => intern.Email" />
+    <PropertyColumn Property="intern => intern.PhoneNumber" />
+
+    <TemplateColumn Context="intern">
+        <a href="@($"interns/edit?id={intern.Id}")">Edit</a> |
+        <a href="@($"interns/details?id={intern.Id}")">Details</a> |
+        <a href="@($"interns/delete?id={intern.Id}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private TraineeRecordContext context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

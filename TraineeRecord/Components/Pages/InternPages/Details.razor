@@ -1,0 +1,54 @@
+﻿@page "/interns/details"
+@using Microsoft.EntityFrameworkCore
+@using TraineeRecord.Models
+@inject IDbContextFactory<TraineeRecord.Data.TraineeRecordContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Intern</h2>
+    <hr />
+    @if (intern is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">FirstName</dt>
+            <dd class="col-sm-10">@intern.FirstName</dd>
+            <dt class="col-sm-2">LastName</dt>
+            <dd class="col-sm-10">@intern.LastName</dd>
+            <dt class="col-sm-2">Gender</dt>
+            <dd class="col-sm-10">@intern.Gender</dd>
+            <dt class="col-sm-2">Email</dt>
+            <dd class="col-sm-10">@intern.Email</dd>
+            <dt class="col-sm-2">PhoneNumber</dt>
+            <dd class="col-sm-10">@intern.PhoneNumber</dd>
+        </dl>
+        <div>
+            <a href="@($"/interns/edit?id={intern.Id}")">Edit</a> |
+            <a href="@($"/interns")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Intern? intern;
+
+    [SupplyParameterFromQuery]
+    private int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        intern = await context.Intern.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (intern is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}
