@@ -1,22 +1,24 @@
-﻿@page "/projects/create"
+﻿@page "/orientations/create"
 @using Microsoft.EntityFrameworkCore
 @using TraineeRecord.Models
 @inject IDbContextFactory<TraineeRecord.Data.TraineeRecordContext> DbFactory
 @inject NavigationManager NavigationManager
 
-<PageTitle>Create project</PageTitle>
+<PageTitle>Create</PageTitle>
 
-<h1>Create project</h1>
+<h1>Create</h1>
+
+<h2>Orientation</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <EditForm method="post" Model="Project" OnValidSubmit="AddProject" FormName="create" Enhance>
+        <EditForm method="post" Model="Orientation" OnValidSubmit="AddOrientation" FormName="create" Enhance>
             <DataAnnotationsValidator />
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
                 <label for="name" class="form-label">Name:</label> 
-                <InputText id="name" @bind-Value="Project.Name" class="form-control" /> 
-                <ValidationMessage For="() => Project.Name" class="text-danger" /> 
+                <InputText id="name" @bind-Value="Orientation.Name" class="form-control" /> 
+                <ValidationMessage For="() => Orientation.Name" class="text-danger" /> 
             </div>        
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
@@ -29,13 +31,13 @@
 
 @code {
     [SupplyParameterFromForm]
-    private Project Project { get; set; } = new();
+    private Orientation Orientation { get; set; } = new();
 
     // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
-    private async Task AddProject()
+    private async Task AddOrientation()
     {
         using var context = DbFactory.CreateDbContext();
-        context.Project.Add(Project);
+        context.Orientation.Add(Orientation);
         await context.SaveChangesAsync();
         NavigationManager.NavigateTo("/orientationsAndProjects");
     }

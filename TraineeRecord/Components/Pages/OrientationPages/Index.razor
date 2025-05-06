@@ -6,16 +6,16 @@
 @inject IDbContextFactory<TraineeRecord.Data.TraineeRecordContext> DbFactory
 
 <p>
-    <a href="projects/create">Create New</a>
+    <a href="orientations/create">Create New</a>
 </p>
 
-<QuickGrid Class="table" Items="context.Project">
-    <PropertyColumn Property="project => project.Name" />
+<QuickGrid Class="table" Items="context.Orientation">
+    <PropertyColumn Property="orientation => orientation.Name" />
 
-    <TemplateColumn Context="project">
-        <a href="@($"projects/edit?id={project.Id}")">Edit</a> |
-        <a href="@($"projects/details?id={project.Id}")">Details</a> |
-        <a href="@($"projects/delete?id={project.Id}")">Delete</a>
+    <TemplateColumn Context="orientation">
+        <a href="@($"orientations/edit?id={orientation.Id}")">Edit</a> |
+        <a href="@($"orientations/details?id={orientation.Id}")">Details</a> |
+        <a href="@($"orientations/delete?id={orientation.Id}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 

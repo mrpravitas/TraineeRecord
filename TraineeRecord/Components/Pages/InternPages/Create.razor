@@ -4,11 +4,9 @@
 @inject IDbContextFactory<TraineeRecord.Data.TraineeRecordContext> DbFactory
 @inject NavigationManager NavigationManager
 
-<PageTitle>Create</PageTitle>
+<PageTitle>Create Intern</PageTitle>
 
-<h1>Create</h1>
-
-<h2>Intern</h2>
+<h1>Create Intern</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -16,12 +14,12 @@
             <DataAnnotationsValidator />
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
-                <label for="firstname" class="form-label">FirstName:</label> 
+                <label for="firstname" class="form-label">First Name:</label> 
                 <InputText id="firstname" @bind-Value="Intern.FirstName" class="form-control" /> 
                 <ValidationMessage For="() => Intern.FirstName" class="text-danger" /> 
             </div>        
             <div class="mb-3">
-                <label for="lastname" class="form-label">LastName:</label> 
+                <label for="lastname" class="form-label">Last Name:</label> 
                 <InputText id="lastname" @bind-Value="Intern.LastName" class="form-control" /> 
                 <ValidationMessage For="() => Intern.LastName" class="text-danger" /> 
             </div>        
@@ -36,7 +34,7 @@
                 <ValidationMessage For="() => Intern.Email" class="text-danger" /> 
             </div>        
             <div class="mb-3">
-                <label for="phonenumber" class="form-label">PhoneNumber:</label> 
+                <label for="phonenumber" class="form-label">Phone Number:</label> 
                 <InputText id="phonenumber" @bind-Value="Intern.PhoneNumber" class="form-control" /> 
                 <ValidationMessage For="() => Intern.PhoneNumber" class="text-danger" /> 
             </div>        
