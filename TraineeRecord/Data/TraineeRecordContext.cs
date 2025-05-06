@@ -15,5 +15,6 @@ namespace TraineeRecord.Data
         }
 
         public DbSet<TraineeRecord.Models.Intern> Intern { get; set; } = default!;
+        public DbSet<TraineeRecord.Models.Project> Project { get; set; } = default!;
     }
 }
